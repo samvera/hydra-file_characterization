@@ -9,12 +9,14 @@ Gem::Specification.new do |gem|
   gem.authors       = [
     "James Treacy",
     "Jeremy Friesen",
-    "Sue Richeson"
+    "Sue Richeson",
+    "Rajesh Balekai"
   ]
   gem.email         = [
     "jatr@kb.dk",
     "jeremy.n.friesen@gmail.com",
-    "spr7b@virginia.edu"
+    "spr7b@virginia.edu",
+    "rbalekai@gmail.com"
   ]
   gem.description   = %q{To provide a wrapper for file characterization}
   gem.summary       = %q{To provide a wrapper for file characterization}
