@@ -13,7 +13,7 @@ Gem::Specification.new do |gem|
   ]
   gem.email         = [
     "jatr@kb.dk",
-    "jeremy.n.friesen@gmail.com"
+    "jeremy.n.friesen@gmail.com",
     "spr7b@virginia.edu"
   ]
   gem.description   = %q{To provide a wrapper for file characterization}
