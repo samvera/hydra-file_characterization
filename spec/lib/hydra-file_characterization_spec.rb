@@ -7,7 +7,7 @@ describe Hydra::FileCharacterization::Characterizer do
   end
 
   let(:filename) { fixture_file('brendan_behan.jpeg') }
-  let(:fits_path) { `which fits`.strip }
+  let(:fits_path) { `which fits || which fits.sh`.strip }
   subject { Hydra::FileCharacterization::Characterizer.new(filename, fits_path) }
 
   it '#call' do
