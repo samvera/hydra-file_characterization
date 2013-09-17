@@ -8,11 +8,13 @@ Gem::Specification.new do |gem|
   gem.version       = Hydra::FileCharacterization::VERSION
   gem.authors       = [
     "James Treacy",
-    "Jeremy Friesen"
+    "Jeremy Friesen",
+    "Sue Richeson"
   ]
   gem.email         = [
     "jatr@kb.dk",
     "jeremy.n.friesen@gmail.com"
+    "spr7b@virginia.edu"
   ]
   gem.description   = %q{To provide a wrapper for file characterization}
   gem.summary       = %q{To provide a wrapper for file characterization}
