@@ -7,8 +7,8 @@ Gem::Specification.new do |gem|
   gem.name          = "hydra-file_characterization"
   gem.version       = Hydra::FileCharacterization::VERSION
   gem.authors       = [
-    "Jeremy Friesen"
     "James Treacy",
+    "Jeremy Friesen"
   ]
   gem.email         = [
     "jatr@kb.dk",
