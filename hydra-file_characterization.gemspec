@@ -6,11 +6,18 @@ require 'hydra-file_characterization/version'
 Gem::Specification.new do |gem|
   gem.name          = "hydra-file_characterization"
   gem.version       = Hydra::FileCharacterization::VERSION
-  gem.authors       = ["Blimey74"]
-  gem.email         = ["jatr@kb.dk"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.authors       = [
+    "Jeremy Friesen"
+    "James Treacy",
+  ]
+  gem.email         = [
+    "jatr@kb.dk",
+    "jeremy.n.friesen@gmail.com"
+  ]
+  gem.description   = %q{To provide a wrapper for file characterization}
+  gem.summary       = %q{To provide a wrapper for file characterization}
+  gem.homepage      = "https://github.com/projecthydra/hydra-file_characterization"
+  gem.license = "APACHE2"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
