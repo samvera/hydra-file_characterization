@@ -6,6 +6,9 @@ module Hydra
     class Characterizer
       include Open3
 
+      class FileNotFoundError < RuntimeError
+      end
+
       attr_reader :filename, :fits_path
       def initialize(filename, fits_path)
         @filename = filename
@@ -13,6 +16,9 @@ module Hydra
       end
 
       def call
+        unless File.exists?(filename)
+          raise FileNotFoundError.new("File: #{filename} does not exist.")
+        end
         command = "#{fits_path} -i \"#{filename}\""
         stdin, stdout, stderr, wait_thr = popen3(command)
         begin
@@ -30,3 +36,4 @@ module Hydra
     end
   end
 end
+
