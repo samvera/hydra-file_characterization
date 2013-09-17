@@ -26,4 +26,10 @@ describe Hydra::FileCharacterization::Characterizer do
   end
 
 
+  describe 'corruptFile' do
+    let(:filename) { fixture_file('brendan_broken.dxxd') }
+    it "should return xml showing Unknown Binary and application/octet-stream mimetype" do
+      expect(subject.call).to include(%(<identity format="Unknown Binary" mimetype="application/octet-stream"))
+    end
+  end
 end
