@@ -13,6 +13,13 @@ How others are using the extract_metadata method
 
 ## Todo Steps
 
-- Given a filename, characterize the file and return a raw XML stream
+- ~~Given a filename, characterize the file and return a raw XML stream~~
+- Provide method for converting a StringIO and original file name to a temp file with comparable, then running the characterizer against the tempfile
+- Provide a configuration option for the fits path; This would be the default for the characterizer
+- Update existing Sufia implementation
+  - Deprecrate Hydra::Derivatives direct method call
+  - Instead call the characterizer with the content
 - Allow characterization services to be chained together
+  - This would involve renaming the Characterizer to something else (i.e. Characterizers::Fits)
 - Provide an ActiveFedora Datastream that maps the raw XML stream to a datastructure
+
