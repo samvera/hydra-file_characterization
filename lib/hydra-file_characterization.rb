@@ -1,5 +1,6 @@
 require "hydra-file_characterization/version"
-require "hydra-file_characterization/characterizer"
+require "hydra-file_characterization/characterizers/fits"
+require "hydra-file_characterization/to_temp_file"
 require "active_support/configurable"
 
 module Hydra
