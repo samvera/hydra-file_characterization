@@ -8,13 +8,12 @@ describe Hydra::FileCharacterization do
     subject { Hydra::FileCharacterization::ToTempFile.new(string, "hello.rb") }
 
     it 'create a tempfile that exists' do
-      @temp_file = ''
       subject.call do |temp_file|
         @temp_file = temp_file
-        expect(File.exist?(@temp_file)).to eq true
-        expect(File.extname(@temp_file)).to eq '.rb'
+        expect(File.exist?(@temp_file.path)).to eq true
+        expect(File.extname(@temp_file.path)).to include '.rb'
       end
-      expect(File.exist?(@temp_file)).to eq false
+      expect(@temp_file.path).to eq nil
     end
   end
 end

@@ -1,4 +1,5 @@
 require 'open3'
+require 'tempfile'
 
 module Hydra::FileCharacterization
   class ToTempFile
@@ -12,14 +13,18 @@ module Hydra::FileCharacterization
     end
 
     def call
-      return unless data.empty?
-      timestamp = DateTime.now.strftime("%Y%m%d%M%S")
-      Tempfile.open("#{timestamp}_#{File.basename(filename)}") do |f|
+      return if data.empty?
+      f = Tempfile.new([File.basename(filename),File.extname(filename)])
+      begin
         f.binmode
         f.write(data)
         f.rewind
         yield(f)
+      ensure
+        f.close
+        f.unlink
       end
+
     end
   end
 end
