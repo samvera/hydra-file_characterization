@@ -3,10 +3,10 @@ require 'hydra-file_characterization'
 
 describe Hydra::FileCharacterization do
 
-  describe Filer do
-    subject(Hydra::FileCharacterization::ToTempFile.new(string, "hello.rb"))
+  describe 'ToTempFile' do
+    subject { Hydra::FileCharacterization::ToTempFile.new(string, "hello.rb") }
 
-    it 'creates a tempfile that exists' do
+    xit 'create a tempfile that exists' do
       @tempfile = nil
       subject.call do |temp_file|
         @temp_file = temp_file
@@ -17,7 +17,7 @@ describe Hydra::FileCharacterization do
     end
   end
 
-  describe Characterizer do
+  describe 'Characterizer' do
     def fixture_file(filename)
       File.expand_path(File.join('../../fixtures', filename), __FILE__)
     end
