@@ -4,7 +4,15 @@
 # loaded once.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+
+module SpecSupport
+  def fixture_file(filename)
+    File.expand_path(File.join('../fixtures', filename), __FILE__)
+  end
+end
+
 RSpec.configure do |config|
+  config.include SpecSupport
   config.treat_symbols_as_metadata_keys_with_true_values = true
   config.run_all_when_everything_filtered = true
   config.filter_run :focus

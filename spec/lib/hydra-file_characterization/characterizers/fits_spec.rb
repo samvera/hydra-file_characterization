@@ -8,10 +8,6 @@ module Hydra::FileCharacterization::Characterizers
     subject { Fits.new(filename, fits_path) }
     let(:fits_path) { `which fits || which fits.sh`.strip }
 
-    def fixture_file(filename)
-      File.expand_path(File.join('../../../../fixtures', filename), __FILE__)
-    end
-
     describe 'validfile' do
       let(:filename) { fixture_file('brendan_behan.jpeg') }
       it '#call' do
