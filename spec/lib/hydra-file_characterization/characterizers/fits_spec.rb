@@ -1,14 +1,16 @@
 require 'spec_helper'
-require 'hydra-file_characterization'
+require 'hydra-file_characterization/characterizers/fits'
 
-describe Hydra::FileCharacterization do
-  describe 'Characterizer' do
-    def fixture_file(filename)
-      File.expand_path(File.join('../../../fixtures', filename), __FILE__)
-    end
+module Hydra::FileCharacterization::Characterizers
 
+  describe Fits do
+
+    subject { Fits.new(filename, fits_path) }
     let(:fits_path) { `which fits || which fits.sh`.strip }
-    subject { Hydra::FileCharacterization::Characterizer.new(filename, fits_path) }
+
+    def fixture_file(filename)
+      File.expand_path(File.join('../../../../fixtures', filename), __FILE__)
+    end
 
     describe 'validfile' do
       let(:filename) { fixture_file('brendan_behan.jpeg') }
@@ -20,7 +22,7 @@ describe Hydra::FileCharacterization do
     describe 'invalidFile' do
       let(:filename) { fixture_file('nofile.pdf') }
       it "should raise an error if the path does not contain the file" do
-        expect {subject.call}.to raise_error(Hydra::FileCharacterization::Characterizer::FileNotFoundError)
+        expect {subject.call}.to raise_error(FileNotFoundError)
       end
     end
 
@@ -37,4 +39,5 @@ describe Hydra::FileCharacterization do
     end
 
   end
+
 end
