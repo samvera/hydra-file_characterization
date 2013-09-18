@@ -4,7 +4,11 @@ require "active_support/configurable"
 
 module Hydra
   module FileCharacterization
-    include ActiveSupport::Configurable
+
+    class Configuration
+      include ActiveSupport::Configurable
+      config_accessor :fits_path
+    end
   end
 end
 
