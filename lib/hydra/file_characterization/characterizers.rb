@@ -3,4 +3,4 @@ module Hydra::FileCharacterization::Characterizers
   end
 end
 
-require 'hydra-file_characterization/characterizers/fits'
+require 'hydra/file_characterization/characterizers/fits'

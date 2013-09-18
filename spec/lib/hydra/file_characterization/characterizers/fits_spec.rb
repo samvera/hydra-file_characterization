@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'hydra-file_characterization/characterizers/fits'
+require 'hydra/file_characterization/characterizers/fits'
 
 module Hydra::FileCharacterization::Characterizers
 

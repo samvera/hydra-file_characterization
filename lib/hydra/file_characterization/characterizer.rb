@@ -1,4 +1,4 @@
-require 'hydra-file_characterization/characterizers'
+require 'hydra/file_characterization/characterizers'
 
 module Hydra::FileCharacterization
   class Characterizer

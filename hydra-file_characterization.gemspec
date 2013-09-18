@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'hydra-file_characterization/version'
+require 'hydra/file_characterization/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "hydra-file_characterization"
+  gem.name          = "hydra/file_characterization"
   gem.version       = Hydra::FileCharacterization::VERSION
   gem.authors       = [
     "James Treacy",
@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
   ]
   gem.description   = %q{To provide a wrapper for file characterization}
   gem.summary       = %q{To provide a wrapper for file characterization}
-  gem.homepage      = "https://github.com/projecthydra/hydra-file_characterization"
+  gem.homepage      = "https://github.com/projecthydra/hydra/file_characterization"
   gem.license = "APACHE2"
 
   gem.files         = `git ls-files`.split($/)

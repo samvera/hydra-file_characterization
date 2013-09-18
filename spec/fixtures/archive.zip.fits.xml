@@ -12,7 +12,7 @@
   </identification>
   <fileinfo>
     <lastmodified toolname="Exiftool" toolversion="9.06" status="SINGLE_RESULT">2013:09:17 15:45:51-04:00</lastmodified>
-    <filepath toolname="OIS File Information" toolversion="0.1" status="SINGLE_RESULT">/Users/jfriesen/Repositories/hydra-file_characterization/spec/fixtures/archive.zip</filepath>
+    <filepath toolname="OIS File Information" toolversion="0.1" status="SINGLE_RESULT">/Users/jfriesen/Repositories/hydra/file_characterization/spec/fixtures/archive.zip</filepath>
     <filename toolname="OIS File Information" toolversion="0.1" status="SINGLE_RESULT">spec/fixtures/archive.zip</filename>
     <size toolname="OIS File Information" toolversion="0.1" status="SINGLE_RESULT">302</size>
     <md5checksum toolname="OIS File Information" toolversion="0.1" status="SINGLE_RESULT">7c5b22ea09ba0eb837f70e2e8094b26f</md5checksum>

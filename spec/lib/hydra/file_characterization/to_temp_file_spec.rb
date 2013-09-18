@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'hydra-file_characterization/to_temp_file'
+require 'hydra/file_characterization/to_temp_file'
 
 describe Hydra::FileCharacterization do
 
