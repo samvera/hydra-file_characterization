@@ -6,7 +6,7 @@ describe Hydra::FileCharacterization do
   describe Filer do
     subject(Hydra::FileCharacterization::ToTempFile.new(string, "hello.rb"))
 
-    it 'create a tempfile that exists' do
+    it 'creates a tempfile that exists' do
       @tempfile = nil
       subject.call do |temp_file|
         @temp_file = temp_file
