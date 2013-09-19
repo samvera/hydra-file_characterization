@@ -15,7 +15,7 @@ module Hydra::FileCharacterization
   def characterizer_name_from(tool_name)
     tool_name.to_s.gsub(/(?:^|_)([a-z])/) { $1.upcase }
   end
-  
+
   def characterize_with(tool_name, file_path)
     tool_obj = characterizer(tool_name).new(file_path)
     tool_obj.call
@@ -24,3 +24,4 @@ module Hydra::FileCharacterization
 end
 
 require 'hydra/file_characterization/characterizers/fits'
+require 'hydra/file_characterization/characterizers/ffprobe'

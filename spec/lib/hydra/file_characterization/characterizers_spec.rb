@@ -10,5 +10,10 @@ module Hydra::FileCharacterization
       it { should eq(Characterizers::Fits) }
     end
 
+    describe 'with :ffprobe tool_name' do
+      let(:tool_name) { :ffprobe }
+      it { should eq(Characterizers::Ffprobe) }
+    end
+
   end
 end
