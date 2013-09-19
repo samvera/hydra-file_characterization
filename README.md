@@ -6,6 +6,28 @@ Hydra::FileCharacterization as (extracted from Sufia and Hydra::Derivatives)
 
 To provide a wrapper for file characterization
 
+## How To Use
+
+If you are using Rails add the following to an initializer (./config/initializers/hydra-file_characterization_config.rb):
+
+    Hydra::FileCharacterization.configure do |config|
+      config.tool_path(:fits, '/path/to/fits')
+    end
+
+To use the characterizer:
+
+    characterization_xml = Hydra.characterize(file.read, file.basename, :fits)
+
+    # This does not work at this point
+    fits_xml, ffprobe_xml  = Hydra.characterize(file.read, file.basename, :fits, :ffprobe)
+
+* Why `file.read`? In the case of ActiveFedora, we have a StringIO instead of a file.
+* Why `file.basename`? In the case of Fits, the characterization takes cues from the extension name.
+
+## Registering New Characterizers
+
+This is possible by adding a characterizer to the `Hydra::FileCharacterization::Characterizers`' namespace.
+
 ## To Consider
 
 How others are using the extract_metadata method
@@ -22,11 +44,3 @@ How others are using the extract_metadata method
 - Allow characterization services to be chained together
   - ~~This would involve renaming the Characterizer to something else (i.e. Characterizers::Fits)~~
 - Provide an ActiveFedora Datastream that maps the raw XML stream to a datastructure
-
-## How to configure path to fits tool
-
-If you are using Rails add the following to an initializer (./config/initializers/hydra-file_characterization_config.rb):
-
-    Hydra::FileCharacterization.configure do |config|
-      config.tool_path(:fits, '/path/to/fits')
-    end
