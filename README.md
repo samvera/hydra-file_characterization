@@ -21,7 +21,7 @@ To use the characterizer:
     # This does not work at this point
     fits_xml, ffprobe_xml  = Hydra.characterize(file.read, file.basename, :fits, :ffprobe)
 
-* Why `file.read`? In the case of ActiveFedora, we have a StringIO instead of a file.
+* Why `file.read`? To highlight that we want a string. In the case of ActiveFedora, we have a StringIO instead of a file.
 * Why `file.basename`? In the case of Fits, the characterization takes cues from the extension name.
 
 ## Registering New Characterizers
