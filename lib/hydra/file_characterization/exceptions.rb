@@ -1,5 +1,11 @@
 module Hydra::FileCharacterization
 
+  class UnspecifiedToolPathError < RuntimeError
+    def initialize(tool_class)
+      super("Unspecified tool path for #{tool_class}")
+    end
+  end
+
   class FileNotFoundError < RuntimeError
   end
 

@@ -1,3 +1,4 @@
+require 'hydra/file_characterization/exceptions'
 require 'hydra/file_characterization/characterizer'
 module Hydra::FileCharacterization::Characterizers
   class Fits < Hydra::FileCharacterization::Characterizer
@@ -8,7 +9,7 @@ module Hydra::FileCharacterization::Characterizers
     end
 
     def tool_path
-      self.class.tool_path || (raise "No Tool Path Given")
+      self.class.tool_path || (raise Hydra::FileCharacterization::UnspecifiedToolPathError.new(self.class))
     end
   end
 end
