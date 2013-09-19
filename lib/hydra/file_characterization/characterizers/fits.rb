@@ -1,7 +1,7 @@
 require 'open3'
+require 'hydra/file_characterization/characterizer'
 module Hydra::FileCharacterization::Characterizers
-  class FileNotFoundError < RuntimeError
-  end
+
   class Fits < Hydra::FileCharacterization::Characterizer
     include Open3
 
@@ -13,7 +13,7 @@ module Hydra::FileCharacterization::Characterizers
 
     def call
       unless File.exists?(filename)
-        raise Hydra::FileCharacterization::Characterizers::FileNotFoundError.new("File: #{filename} does not exist.")
+        raise Hydra::FileCharacterization::FileNotFoundError.new("File: #{filename} does not exist.")
       end
       command = "#{fits_path} -i \"#{filename}\""
       stdin, stdout, stderr, wait_thr = popen3(command)
