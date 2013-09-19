@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
   ]
   gem.description   = %q{To provide a wrapper for file characterization}
   gem.summary       = %q{To provide a wrapper for file characterization}
-  gem.homepage      = "https://github.com/projecthydra/hydra/file_characterization"
+  gem.homepage      = "https://github.com/projecthydra/hydra-file_characterization"
   gem.license = "APACHE2"
 
   gem.files         = `git ls-files`.split($/)
