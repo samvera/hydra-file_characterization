@@ -53,10 +53,9 @@ module Hydra
 
     describe 'preliminary integration' do
       let (:tempfile) { ToTempFile.new("This is the content of the file.", 'test.rb')}
-      let(:fits_path) { `which fits || which fits.sh`.strip }
       it '#call' do
         tempfile.call do |f|
-          @fits_output = Characterizers::Fits.new(f.path,fits_path ).call
+          @fits_output = Characterizers::Fits.new(f.path ).call
         end
         expect(@fits_output).to include '<identity format="Plain text" mimetype="text/plain"'
       end

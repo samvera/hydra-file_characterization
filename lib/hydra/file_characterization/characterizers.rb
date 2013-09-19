@@ -17,8 +17,7 @@ module Hydra::FileCharacterization
   end
   
   def characterize_with(tool_name, file_path)
-    tool_path = `which fits || which fits.sh`.strip
-    tool_obj = characterizer(tool_name).new(file_path, tool_path)
+    tool_obj = characterizer(tool_name).new(file_path)
     tool_obj.call
   end
 

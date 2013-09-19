@@ -5,8 +5,7 @@ module Hydra::FileCharacterization::Characterizers
 
   describe Fits do
 
-    subject { Fits.new(filename, fits_path) }
-    let(:fits_path) { `which fits || which fits.sh`.strip }
+    subject { Fits.new(filename) }
 
     describe 'validfile' do
       let(:filename) { fixture_file('brendan_behan.jpeg') }

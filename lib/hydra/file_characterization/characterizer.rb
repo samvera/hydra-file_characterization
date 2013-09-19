@@ -5,10 +5,9 @@ module Hydra::FileCharacterization
   class Characterizer
     include Open3
 
-    attr_reader :filename, :tool_path
-    def initialize(filename, tool_path)
+    attr_reader :filename
+    def initialize(filename)
       @filename = filename
-      @tool_path = tool_path
     end
 
     def call
@@ -32,6 +31,10 @@ module Hydra::FileCharacterization
     protected
 
     def command
+      raise NotImplementedError, "Method #command should be overriden in child classes"
+    end
+
+    def tool_path
       raise NotImplementedError, "Method #command should be overriden in child classes"
     end
   end
