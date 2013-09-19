@@ -5,17 +5,16 @@ module Hydra::FileCharacterization::Characterizers
   class Fits < Hydra::FileCharacterization::Characterizer
     include Open3
 
-    attr_reader :filename, :fits_path
-    def initialize(filename, fits_path)
+    attr_reader :filename, :tool_path
+    def initialize(filename, tool_path)
       @filename = filename
-      @fits_path = fits_path
+      @tool_path = tool_path
     end
 
     def call
       unless File.exists?(filename)
         raise Hydra::FileCharacterization::FileNotFoundError.new("File: #{filename} does not exist.")
       end
-      command = "#{fits_path} -i \"#{filename}\""
       stdin, stdout, stderr, wait_thr = popen3(command)
       begin
         out = stdout.read
@@ -28,6 +27,11 @@ module Hydra::FileCharacterization::Characterizers
         stdout.close
         stderr.close
       end
+    end
+
+    protected
+    def command
+      "#{tool_path} -i \"#{filename}\""
     end
   end
 end
