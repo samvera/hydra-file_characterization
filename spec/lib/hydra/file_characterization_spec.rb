@@ -45,10 +45,10 @@ module Hydra
       subject { Configuration.new }
       let (:expected_fits_path) {"string"}
       before(:each) do
-        subject.fits_path = expected_fits_path
+        subject.tool_path = expected_fits_path
       end
-      its(:config) {should have_key :fits_path}
-      its(:fits_path) {should == expected_fits_path}
+      its(:config) {should have_key :tool_path}
+      its(:tool_path) {should == expected_fits_path}
     end
 
     describe 'preliminary integration' do
