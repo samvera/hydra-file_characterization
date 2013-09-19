@@ -8,8 +8,5 @@ module Hydra::FileCharacterization::Characterizers
       "#{tool_path} -i \"#{filename}\""
     end
 
-    def tool_path
-      self.class.tool_path || (raise Hydra::FileCharacterization::UnspecifiedToolPathError.new(self.class))
-    end
   end
 end

@@ -38,7 +38,7 @@ module Hydra::FileCharacterization
     end
 
     def tool_path
-      raise NotImplementedError, "Method #tool_path should be overriden in child classes"
+      self.class.tool_path || (raise Hydra::FileCharacterization::UnspecifiedToolPathError.new(self.class))
     end
   end
 end
