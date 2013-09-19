@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'hydra/file_characterization/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "hydra/file_characterization"
+  gem.name          = "hydra-file_characterization"
   gem.version       = Hydra::FileCharacterization::VERSION
   gem.authors       = [
     "James Treacy",
