@@ -12,7 +12,7 @@ module Hydra
     fits_path = `which fits || which fits.sh`.strip
     tool_outputs = []
     tool_names = Array(options).flatten.compact
-    FileCharacterization::ToTempFile.new(content, filename).call do |f|
+    FileCharacterization::ToTempFile.open(content, filename) do |f|
       tool_names.each do |tool_name|
         tool_outputs << FileCharacterization.characterizer(tool_name).new(f.path, fits_path).call
       end

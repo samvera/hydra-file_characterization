@@ -5,6 +5,10 @@ module Hydra::FileCharacterization
   class ToTempFile
     include Open3
 
+    def self.open(*args, &block)
+      new(*args).call(&block)
+    end
+
     attr_accessor :data, :filename
 
     def initialize(data, filename)
