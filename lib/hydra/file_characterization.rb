@@ -22,8 +22,22 @@ module Hydra
   module FileCharacterization
 
     class Configuration
-      include ActiveSupport::Configurable
-      config_accessor :tool_path
+      def configure
+        yield(self)
+      end
+
+      def tool_path(tool_name, tool_path)
+        Hydra::FileCharacterization.characterizer(tool_name).tool_path = tool_path
+      end
+    end
+
+    module_function
+    def configuration
+      @configuration ||= Configuration.new
+    end
+
+    def configure(&block)
+      configuration.configure(&block)
     end
   end
 end

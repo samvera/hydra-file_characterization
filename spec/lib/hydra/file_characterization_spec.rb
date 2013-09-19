@@ -39,25 +39,25 @@ module Hydra
 
   end
 
-  module FileCharacterization
+  describe FileCharacterization do
 
-    describe Configuration do
-      subject { Configuration.new }
-      let (:expected_fits_path) {"string"}
-      before(:each) do
-        subject.tool_path = expected_fits_path
+    describe '.configure' do
+      let(:content) { "class Test; end\n" }
+      let(:filename) { 'test.rb' }
+      around do |example|
+        old_tool_path = Hydra::FileCharacterization::Characterizers::Fits.tool_path
+        example.run
+        Hydra::FileCharacterization::Characterizers::Fits.tool_path = old_tool_path
       end
-      its(:config) {should have_key :tool_path}
-      its(:tool_path) {should == expected_fits_path}
-    end
 
-    describe 'preliminary integration' do
-      let (:tempfile) { ToTempFile.new("This is the content of the file.", 'test.rb')}
-      it '#call' do
-        tempfile.call do |f|
-          @fits_output = Characterizers::Fits.new(f.path ).call
+      it 'without configuration' do
+        Hydra::FileCharacterization.configure do |config|
+          config.tool_path(:fits, nil)
         end
-        expect(@fits_output).to include '<identity format="Plain text" mimetype="text/plain"'
+
+        expect {
+          Hydra.characterize(content, filename, :fits)
+        }.to raise_error(Hydra::FileCharacterization::UnspecifiedToolPathError)
       end
     end
 

@@ -25,6 +25,8 @@ How others are using the extract_metadata method
 
 ## How to configure path to fits tool
 
-- In your application code use the following line to configure the path to fits
-Hydra::FileCharacterization::Characterizers::Fits.tool_path = '/path/to/fits'
+If you are using Rails add the following to an initializer (./config/initializers/hydra-file_characterization_config.rb):
 
+    Hydra::FileCharacterization.configure do |config|
+      config.tool_path(:fits, '/path/to/fits')
+    end
