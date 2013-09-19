@@ -35,23 +35,20 @@ module Hydra
 
   module FileCharacterization
 
-    class Configuration
-      def configure
-        yield(self)
-      end
+    class << self
+      attr_accessor :configuration
+    end
 
+    def self.configure
+      self.configuration ||= Configuration.new
+      yield(configuration)
+    end
+
+    class Configuration
       def tool_path(tool_name, tool_path)
         Hydra::FileCharacterization.characterizer(tool_name).tool_path = tool_path
       end
     end
 
-    module_function
-    def configuration
-      @configuration ||= Configuration.new
-    end
-
-    def configure(&block)
-      configuration.configure(&block)
-    end
   end
 end
