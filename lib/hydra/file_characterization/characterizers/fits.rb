@@ -8,7 +8,7 @@ module Hydra::FileCharacterization::Characterizers
     end
 
     def tool_path
-      `which fits || which fits.sh`.strip
+      self.class.tool_path || (raise "No Tool Path Given")
     end
   end
 end

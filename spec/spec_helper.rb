@@ -22,4 +22,7 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = 'random'
+  config.before(:suite) do
+    Hydra::FileCharacterization::Characterizers::Fits.tool_path = `which fits || which fits.sh`.strip
+  end
 end

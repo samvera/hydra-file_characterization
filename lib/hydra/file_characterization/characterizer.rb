@@ -1,9 +1,12 @@
 require 'hydra/file_characterization/exceptions'
 require 'open3'
+require 'active_support/core_ext/class/attribute'
 
 module Hydra::FileCharacterization
   class Characterizer
     include Open3
+
+    class_attribute :tool_path
 
     attr_reader :filename
     def initialize(filename)
@@ -35,7 +38,7 @@ module Hydra::FileCharacterization
     end
 
     def tool_path
-      raise NotImplementedError, "Method #command should be overriden in child classes"
+      raise NotImplementedError, "Method #tool_path should be overriden in child classes"
     end
   end
 end
