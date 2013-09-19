@@ -2,7 +2,7 @@ require 'open3'
 module Hydra::FileCharacterization::Characterizers
   class FileNotFoundError < RuntimeError
   end
-  class Fits
+  class Fits < Hydra::FileCharacterization::Characterizer
     include Open3
 
     attr_reader :filename, :fits_path
