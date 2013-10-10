@@ -32,6 +32,11 @@ module Hydra
     #   end
     #
     # @example
+    #   xml_string = Hydra::FileCharacterization.characterize(contents_of_a_file, 'file.rb', :fits) do |config|
+    #     config[:fits] = lambda {|filename| … }
+    #   end
+    #
+    # @example
     #   fits_xml, ffprobe_xml = Hydra::FileCharacterization.characterize(contents_of_a_file, 'file.rb', :fits, :ffprobe)
     #
     # @param [String] content - The contents of the original file

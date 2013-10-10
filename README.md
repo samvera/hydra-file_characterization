@@ -31,11 +31,19 @@ xml_string = Hydra::FileCharacterization.characterize(contents_of_a_file, 'file.
 end
 ```
 
-…or even make the path callable
+…or even make the path callable…
 
 ```ruby
 xml_string = Hydra::FileCharacterization.characterize(contents_of_a_file, 'file.rb', :fits) do |config|
   config[:fits] = lambda {|filename| … }
+end
+```
+
+…or even create your custom characterizer on the file…
+
+```ruby
+xml_string = Hydra::FileCharacterization.characterize(contents_of_a_file, 'file.rb', :my_characterizer) do |config|
+  config[:my_characterizer] = lambda {|filename| … }
 end
 ```
 
