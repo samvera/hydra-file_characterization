@@ -5,6 +5,11 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
+GEM_ROOT = File.expand_path("../../", __FILE__)
+$:.unshift File.join(GEM_ROOT, "lib")
+
+require 'hydra/file_characterization'
+
 module SpecSupport
   def fixture_file(filename)
     File.expand_path(File.join('../fixtures', filename), __FILE__)

@@ -18,6 +18,21 @@ module Hydra::FileCharacterization
       unless File.exists?(filename)
         raise Hydra::FileCharacterization::FileNotFoundError.new("File: #{filename} does not exist.")
       end
+
+      if tool_path.respond_to?(:call)
+        tool_path.call(filename)
+      else
+        internal_call
+      end
+    end
+
+    def tool_path
+      @tool_path || self.class.tool_path || (raise Hydra::FileCharacterization::UnspecifiedToolPathError.new(self.class))
+    end
+
+    protected
+
+    def internal_call
       stdin, stdout, stderr, wait_thr = popen3(command)
       begin
         out = stdout.read
@@ -31,12 +46,6 @@ module Hydra::FileCharacterization
         stderr.close
       end
     end
-
-    def tool_path
-      @tool_path || self.class.tool_path || (raise Hydra::FileCharacterization::UnspecifiedToolPathError.new(self.class))
-    end
-
-    protected
 
     def command
       raise NotImplementedError, "Method #command should be overriden in child classes"

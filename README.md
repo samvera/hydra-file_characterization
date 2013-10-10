@@ -21,11 +21,19 @@ You can call a single characterizer…
 xml_string = Hydra::FileCharacterization.characterize(contents_of_a_file, 'file.rb', :fits)
 ```
 
-…for this particular call, you can specify custom fits path.
+…for this particular call, you can specify custom fits path…
 
 ```ruby
 xml_string = Hydra::FileCharacterization.characterize(contents_of_a_file, 'file.rb', :fits) do |config|
   config[:fits] = './really/custom/path/to/fits'
+end
+```
+
+…or even make the path callable
+
+```ruby
+xml_string = Hydra::FileCharacterization.characterize(contents_of_a_file, 'file.rb', :fits) do |config|
+  config[:fits] = lambda {|filename| … }
 end
 ```
 
