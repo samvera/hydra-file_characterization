@@ -17,7 +17,8 @@ module Hydra::FileCharacterization
     end
 
     def call
-      return if data.empty?
+      return if data.nil?
+      data = data.read if data.respond_to?(:read)
       f = Tempfile.new([File.basename(filename),File.extname(filename)])
       begin
         f.binmode
