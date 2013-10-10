@@ -1,5 +1,7 @@
 # hydra-file_chracterization
 
+[![Gem Version](https://badge.fury.io/rb/hydra-file_characterization.png)](http://badge.fury.io/rb/hydra-file_characterization)
+
 Hydra::FileCharacterization as (extracted from Sufia and Hydra::Derivatives)
 
 ## Purpose
