@@ -16,8 +16,8 @@ module Hydra::FileCharacterization
     tool_name.to_s.gsub(/(?:^|_)([a-z])/) { $1.upcase }
   end
 
-  def characterize_with(tool_name, file_path)
-    tool_obj = characterizer(tool_name).new(file_path)
+  def characterize_with(tool_name, *args)
+    tool_obj = characterizer(tool_name).new(*args)
     tool_obj.call
   end
 

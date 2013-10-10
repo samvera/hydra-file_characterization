@@ -9,8 +9,9 @@ module Hydra::FileCharacterization
     class_attribute :tool_path
 
     attr_reader :filename
-    def initialize(filename)
+    def initialize(filename, tool_path = nil)
       @filename = filename
+      @tool_path = tool_path
     end
 
     def call
@@ -31,14 +32,14 @@ module Hydra::FileCharacterization
       end
     end
 
+    def tool_path
+      @tool_path || self.class.tool_path || (raise Hydra::FileCharacterization::UnspecifiedToolPathError.new(self.class))
+    end
+
     protected
 
     def command
       raise NotImplementedError, "Method #command should be overriden in child classes"
-    end
-
-    def tool_path
-      self.class.tool_path || (raise Hydra::FileCharacterization::UnspecifiedToolPathError.new(self.class))
     end
   end
 end
