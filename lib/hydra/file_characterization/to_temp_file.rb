@@ -9,16 +9,14 @@ module Hydra::FileCharacterization
       new(*args).call(&block)
     end
 
-    attr_accessor :data, :filename
+    attr_reader :data, :filename
 
     def initialize(data, filename)
-      @data = data
+      self.data = data
       @filename = filename
     end
 
     def call
-      return if data.nil?
-      data = data.read if data.respond_to?(:read)
       f = Tempfile.new([File.basename(filename),File.extname(filename)])
       begin
         f.binmode
@@ -30,6 +28,12 @@ module Hydra::FileCharacterization
         f.unlink
       end
 
+    end
+
+    protected
+
+    def data=(value)
+      @data = value.respond_to?(:read) ? value.read : value
     end
   end
 end
