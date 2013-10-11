@@ -33,7 +33,12 @@ module Hydra::FileCharacterization
     protected
 
     def data=(value)
-      @data = value.respond_to?(:read) ? value.read : value
+      if value.respond_to?(:read)
+        @data = value.read
+        value.rewind if value.respond_to?(:rewind)
+      else
+        @data = value
+      end
     end
   end
 end
