@@ -12,7 +12,7 @@ module Hydra::FileCharacterization
     attr_reader :filename
 
     def initialize(filename)
-      @filename = filename
+      @filename = filename.is_a?(Array) ? filename.join("") : filename
     end
 
     def call(data)
