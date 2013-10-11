@@ -60,7 +60,7 @@ module Hydra
       tool_names = Array(tool_names).flatten.compact
       custom_paths = {}
       yield(custom_paths) if block_given?
-      FileCharacterization::ToTempFile.open(content, filename) do |f|
+      FileCharacterization::ToTempFile.open(filename, content) do |f|
         tool_names.each do |tool_name|
           tool_outputs << FileCharacterization.characterize_with(tool_name, f.path, custom_paths[tool_name])
         end

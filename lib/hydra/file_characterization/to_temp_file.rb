@@ -5,40 +5,32 @@ module Hydra::FileCharacterization
   class ToTempFile
     include Open3
 
-    def self.open(*args, &block)
-      new(*args).call(&block)
+    def self.open(filename, data, &block)
+      new(filename).call(data, &block)
     end
 
-    attr_reader :data, :filename
+    attr_reader :filename
 
-    def initialize(data, filename)
-      self.data = data
+    def initialize(filename)
       @filename = filename
     end
 
-    def call
+    def call(data)
       f = Tempfile.new([File.basename(filename),File.extname(filename)])
       begin
-        f.binmode
-        f.write(data)
+        if data.respond_to? :read
+          f.write(data.read)
+        else
+          f.write(data)
+        end
         f.rewind
         yield(f)
       ensure
+        data.rewind if data.respond_to? :rewind
         f.close
         f.unlink
       end
-
     end
 
-    protected
-
-    def data=(value)
-      if value.respond_to?(:read)
-        @data = value.read
-        value.rewind if value.respond_to?(:rewind)
-      else
-        @data = value
-      end
-    end
   end
 end
