@@ -18,6 +18,7 @@ module Hydra::FileCharacterization
     def call(data)
       f = Tempfile.new([File.basename(filename),File.extname(filename)])
       begin
+        f.binmode
         if data.respond_to? :read
           f.write(data.read)
         else
