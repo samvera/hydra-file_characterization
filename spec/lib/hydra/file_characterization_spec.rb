@@ -71,10 +71,9 @@ module Hydra
         Hydra::FileCharacterization.configure do |config|
           config.tool_path(:fits, nil)
         end
+        response = Hydra::FileCharacterization.characterize(content, filename, :fits)
+        expect(response).to match(/#{'<identity format="Plain text" mimetype="text/plain"'}/)
 
-        expect {
-          Hydra::FileCharacterization.characterize(content, filename, :fits)
-        }.to raise_error(Hydra::FileCharacterization::UnspecifiedToolPathError)
       end
     end
 

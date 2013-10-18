@@ -45,11 +45,7 @@ module Hydra::FileCharacterization
       end
 
       context 'without a specified tool_path' do
-        it 'should raise Hydra::FileCharacterization::UnspecifiedToolPathError' do
-          expect {
-            subject.tool_path
-          }.to raise_error(Hydra::FileCharacterization::UnspecifiedToolPathError)
-        end
+        its(:tool_path) { should eq 'characterizer' }
       end
     end
   end
