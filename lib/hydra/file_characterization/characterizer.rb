@@ -27,10 +27,14 @@ module Hydra::FileCharacterization
     end
 
     def tool_path
-      @tool_path || self.class.tool_path || (raise Hydra::FileCharacterization::UnspecifiedToolPathError.new(self.class))
+      @tool_path || self.class.tool_path || convention_based_tool_name
     end
 
     protected
+
+    def convention_based_tool_name
+      self.class.name.split("::").last.downcase
+    end
 
     def internal_call
       stdin, stdout, stderr, wait_thr = popen3(command)
