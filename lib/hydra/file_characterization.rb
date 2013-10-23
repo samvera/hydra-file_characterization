@@ -39,6 +39,9 @@ module Hydra
     # @example
     #   fits_xml, ffprobe_xml = Hydra::FileCharacterization.characterize(contents_of_a_file, 'file.rb', :fits, :ffprobe)
     #
+    # @example With an open file
+    #   fits_xml, ffprobe_xml = Hydra::FileCharacterization.characterize(File.open('foo.mkv'), :fits, :ffprobe)
+    #
     # @param [String] content - The contents of the original file
     # @param [String] filename - The original file's filename; Some
     #   characterization tools take hints from the file names
@@ -55,16 +58,13 @@ module Hydra
     #    key to the yieldparam with a value, that value will be used as the path
     #
     # @see Hydra::FileCharacterization.configure
-    def self.characterize(content, filename, *tool_names)
-      tool_outputs = []
+    def self.characterize(*args)
+      content, filename, tool_names = extract_arguments(args)
       tool_names = Array(tool_names).flatten.compact
       custom_paths = {}
       yield(custom_paths) if block_given?
-      FileCharacterization::ToTempFile.open(filename, content) do |f|
-        tool_names.each do |tool_name|
-          tool_outputs << FileCharacterization.characterize_with(tool_name, f.path, custom_paths[tool_name])
-        end
-      end
+      
+      tool_outputs = run_characterizers(content, filename, tool_names, custom_paths)
       tool_names.size == 1 ? tool_outputs.first : tool_outputs
     end
 
@@ -72,6 +72,45 @@ module Hydra
       self.configuration ||= Configuration.new
       yield(configuration)
     end
+
+    private
+
+      # Break up a list of arguments into two possible lists:
+      #   option1:  [String] content, [String] filename, [Array] tool_names
+      #   option2:  [File] content, [Array] tool_names
+      # In the case of option2, derive the filename from the file's path  
+      # @return [String, File], [String], [Array]
+      def self.extract_arguments(args)
+        content = args.shift
+        filename = if content.is_a? File
+          File.basename(content.path)
+        else
+           args.shift
+        end
+        tool_names = args
+        return content, filename, tool_names
+      end
+
+      # @param [File, String] content Either an open file or a string. If a string is passed
+      #                               a temp file will be created
+      # @param [String] filename Used in creating a temp file name
+      # @param [Array<Symbol>] tool_names A list of symbols referencing the characerization tools to run
+      # @param [Hash] custom_paths The paths to the executables of the tool.
+      def self.run_characterizers(content, filename, tool_names, custom_paths)
+        if content.is_a? File
+          run_characterizers_on_file(content, tool_names, custom_paths)
+        else 
+          FileCharacterization::ToTempFile.open(filename, content) do |f|
+            run_characterizers_on_file(f, tool_names, custom_paths)
+          end
+        end
+      end
+
+      def self.run_characterizers_on_file(f, tool_names, custom_paths)
+        tool_names.map do |tool_name|
+           FileCharacterization.characterize_with(tool_name, f.path, custom_paths[tool_name])
+        end
+      end
 
     class Configuration
       def tool_path(tool_name, tool_path)
