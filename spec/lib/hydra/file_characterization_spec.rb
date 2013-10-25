@@ -61,11 +61,22 @@ module Hydra
 
       describe "for a file on disk" do
         let(:file) { File.open(fixture_file('brendan_behan.jpeg')) }
-        subject { Hydra::FileCharacterization.characterize(file, tool_names) }
+        describe "without path specified" do
+          subject { Hydra::FileCharacterization.characterize(file, tool_names) }
 
-        describe 'for fits' do
-          let(:tool_names) { [:fits] }
-          it { should match(/#{'<identity format="JPEG File Interchange Format" mimetype="image/jpeg"'}/) }
+          describe 'for fits' do
+            let(:tool_names) { [:fits] }
+            it { should match(/#{'<identity format="JPEG File Interchange Format" mimetype="image/jpeg"'}/) }
+          end
+        end
+        describe "with path specified" do
+          let(:file) { File.open(fixture_file('brendan_behan.jpeg')) }
+          subject { Hydra::FileCharacterization.characterize(file, 'Brendan.jpg', tool_names) }
+
+          describe 'for fits' do
+            let(:tool_names) { [:fits] }
+            it { should match(/#{'<identity format="JPEG File Interchange Format" mimetype="image/jpeg"'}/) }
+          end
         end
       end
     end
