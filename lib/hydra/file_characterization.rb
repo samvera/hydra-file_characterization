@@ -42,6 +42,9 @@ module Hydra
     # @example With an open file
     #   fits_xml, ffprobe_xml = Hydra::FileCharacterization.characterize(File.open('foo.mkv'), :fits, :ffprobe)
     #
+    # @example With an open file and a filename
+    #   fits_xml, ffprobe_xml = Hydra::FileCharacterization.characterize(File.open('foo.mkv'), 'my_movie.mkv', :fits, :ffprobe)
+    #
     # @param [String] content - The contents of the original file
     # @param [String] filename - The original file's filename; Some
     #   characterization tools take hints from the file names
@@ -82,7 +85,7 @@ module Hydra
       # @return [String, File], [String], [Array]
       def self.extract_arguments(args)
         content = args.shift
-        filename = if content.is_a? File
+        filename = if content.is_a?(File) && !args[0].is_a?(String)
           File.basename(content.path)
         else
            args.shift
