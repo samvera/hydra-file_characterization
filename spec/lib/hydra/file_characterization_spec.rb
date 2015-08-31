@@ -14,7 +14,7 @@ module Hydra
 
         describe 'for fits' do
           let(:tool_names) { [:fits] }
-          it { should match(/#{'<identity format="Plain text" mimetype="text/plain"'}/) }
+          it { is_expected.to match(/#{'<identity format="Plain text" mimetype="text/plain"'}/) }
         end
 
         describe 'with configured path' do

@@ -6,7 +6,8 @@ module Hydra::FileCharacterization
     let(:instance_tool_path) { nil }
     let(:class_tool_path) { nil }
 
-    subject { Hydra::FileCharacterization::Characterizer.new(filename, instance_tool_path) }
+    let(:characterizer) { Hydra::FileCharacterization::Characterizer.new(filename, instance_tool_path) }
+    subject { characterizer }
     around(:each) do |example|
       Hydra::FileCharacterization::Characterizer.tool_path = class_tool_path
       example.run
@@ -30,22 +31,24 @@ module Hydra::FileCharacterization
     end
 
     context 'tool_path' do
+      subject { characterizer.tool_path }
+
       context 'with custom instance tool_path' do
         let(:instance_tool_path) { '/arbitrary/path' }
         let(:class_tool_path) { '/a_different/path' }
 
-        its(:tool_path) { should eq instance_tool_path}
+        it { is_expected.to eq instance_tool_path }
       end
 
       context 'with custom class tool_path' do
         let(:instance_tool_path) { nil }
         let(:class_tool_path) { '/a_different/path' }
 
-        its(:tool_path) { should eq class_tool_path}
+        it { is_expected.to eq class_tool_path }
       end
 
       context 'without a specified tool_path' do
-        its(:tool_path) { should eq 'characterizer' }
+        it { is_expected.to eq 'characterizer' }
       end
     end
   end
