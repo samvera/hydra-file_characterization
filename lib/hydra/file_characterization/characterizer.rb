@@ -19,11 +19,7 @@ module Hydra::FileCharacterization
         raise Hydra::FileCharacterization::FileNotFoundError.new("File: #{filename} does not exist.")
       end
 
-      if tool_path.respond_to?(:call)
-        tool_path.call(filename)
-      else
-        internal_call
-      end
+      post_process(output)
     end
 
     def tool_path
@@ -32,27 +28,43 @@ module Hydra::FileCharacterization
 
     protected
 
-    def convention_based_tool_name
-      self.class.name.split("::").last.downcase
-    end
-
-    def internal_call
-      stdin, stdout, stderr, wait_thr = popen3(command)
-      begin
-        out = stdout.read
-        err = stderr.read
-        exit_status = wait_thr.value
-        raise "Unable to execute command \"#{command}\"\n#{err}" unless exit_status.success?
-        out
-      ensure
-        stdin.close
-        stdout.close
-        stderr.close
+      # Override this method if you want your processor to mutate the
+      # raw output
+      def post_process(raw_output)
+        raw_output
       end
-    end
 
-    def command
-      raise NotImplementedError, "Method #command should be overriden in child classes"
-    end
+      def convention_based_tool_name
+        self.class.name.split("::").last.downcase
+      end
+
+      def internal_call
+        stdin, stdout, stderr, wait_thr = popen3(command)
+        begin
+          out = stdout.read
+          err = stderr.read
+          exit_status = wait_thr.value
+          raise "Unable to execute command \"#{command}\"\n#{err}" unless exit_status.success?
+          out
+        ensure
+          stdin.close
+          stdout.close
+          stderr.close
+        end
+      end
+
+      def command
+        raise NotImplementedError, "Method #command should be overriden in child classes"
+      end
+
+    private
+
+      def output
+        if tool_path.respond_to?(:call)
+          tool_path.call(filename)
+        else
+          internal_call
+        end
+      end
   end
 end
