@@ -26,6 +26,10 @@ module Hydra::FileCharacterization
       @tool_path || self.class.tool_path || convention_based_tool_name
     end
 
+    def logger
+      @logger ||= activefedora_logger || Logger.new(STDERR)
+    end
+
     protected
 
       # Override this method if you want your processor to mutate the
@@ -65,6 +69,10 @@ module Hydra::FileCharacterization
         else
           internal_call
         end
+      end
+
+      def activefedora_logger
+        ActiveFedora::Base.logger if defined? ActiveFedora
       end
   end
 end
