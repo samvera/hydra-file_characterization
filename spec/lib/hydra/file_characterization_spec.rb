@@ -6,7 +6,7 @@ module Hydra
 
   describe FileCharacterization do
 
-    describe '.characterize' do
+    describe '.characterize', unless: ENV['TRAVIS'] do
       describe "for content in memory" do
         let(:content) { "class Test; end\n" }
         let(:filename) { 'test.rb' }
@@ -89,7 +89,7 @@ module Hydra
         Hydra::FileCharacterization::Characterizers::Fits.tool_path = old_tool_path
       end
 
-      it 'without configuration' do
+      it 'without configuration', unless: ENV['TRAVIS'] do
         Hydra::FileCharacterization.configure do |config|
           config.tool_path(:fits, nil)
         end
