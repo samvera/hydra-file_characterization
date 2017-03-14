@@ -15,10 +15,16 @@ Hydra::FileCharacterization.configure do |config|
   config.tool_path(:fits, '/path/to/fits')
 end
 ```
+```ruby
+Hydra::FileCharacterization.characterize(File.read(filename), File.basename(filename), :fits)```
+
+* Why `file.read`? To highlight that we want a string. In the case of ActiveFedora, we have a StringIO instead of a file.
+* Why `file.basename`? In the case of Fits, the characterization takes cues from the extension name.
 
 You can call a single characterizer…
+
 ```ruby
-xml_string = Hydra::FileCharacterization.characterize(contents_of_a_file, 'file.rb', :fits)
+xml_string = Hydra::FileCharacterization.characterize(File.read("/path/to/my/file.rb"), 'file.rb', :fits)
 ```
 
 …for this particular call, you can specify custom fits path…
@@ -50,9 +56,6 @@ You can also call multiple characterizers at the same time.
 ```ruby
 fits_xml, ffprobe_xml = Hydra::FileCharacterization.characterize(contents_of_a_file, 'file.rb', :fits, :ffprobe)
 ```
-
-* Why `file.read`? To highlight that we want a string. In the case of ActiveFedora, we have a StringIO instead of a file.
-* Why `file.basename`? In the case of Fits, the characterization takes cues from the extension name.
 
 ## Registering New Characterizers
 
