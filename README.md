@@ -1,4 +1,6 @@
-# hydra-file_chracterization [![Version](https://badge.fury.io/rb/hydra-file_characterization.png)](http://badge.fury.io/rb/hydra-file_characterization) [![Build Status](https://travis-ci.org/projecthydra/hydra-file_characterization.png?branch=master)](https://travis-ci.org/projecthydra/hydra-file_characterization) [![Dependency Status](https://gemnasium.com/projecthydra/hydra-file_characterization.png)](https://gemnasium.com/projecthydra/hydra-file_characterization)
+# hydra-file_chracterization
+[![Version](https://badge.fury.io/rb/hydra-file_characterization.png)](http://badge.fury.io/rb/hydra-file_characterization)
+[![Build Status](https://travis-ci.org/projecthydra/hydra-file_characterization.png?branch=master)](https://travis-ci.org/projecthydra/hydra-file_characterization)
 
 Hydra::FileCharacterization as (extracted from Sufia and Hydra::Derivatives)
 
