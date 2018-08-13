@@ -1,6 +1,6 @@
 # hydra-file_chracterization
 [![Version](https://badge.fury.io/rb/hydra-file_characterization.png)](http://badge.fury.io/rb/hydra-file_characterization)
-[![Build Status](https://travis-ci.org/projecthydra/hydra-file_characterization.png?branch=master)](https://travis-ci.org/projecthydra/hydra-file_characterization)
+[![Build Status](https://travis-ci.org/samvera/hydra-file_characterization.png?branch=master)](https://travis-ci.org/samvera/hydra-file_characterization)
 [![Coverage Status](https://coveralls.io/repos/github/samvera/hydra-file_characterization/badge.svg?branch=master)](https://coveralls.io/github/samvera/hydra-file_characterization?branch=master)
 
 Hydra::FileCharacterization as (extracted from Sufia and Hydra::Derivatives)
