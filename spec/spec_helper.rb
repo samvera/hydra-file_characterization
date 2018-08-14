@@ -8,6 +8,9 @@
 GEM_ROOT = File.expand_path("../../", __FILE__)
 $:.unshift File.join(GEM_ROOT, "lib")
 
+require 'coveralls'
+Coveralls.wear!
+
 require 'hydra/file_characterization'
 
 module SpecSupport
