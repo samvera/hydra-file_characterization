@@ -1,15 +1,33 @@
-# hydra-file_chracterization
-[![Version](https://badge.fury.io/rb/hydra-file_characterization.png)](http://badge.fury.io/rb/hydra-file_characterization)
+# hydra-file_characterization
+
+Code: [![Version](https://badge.fury.io/rb/hydra-file_characterization.png)](http://badge.fury.io/rb/hydra-file_characterization)
 [![Build Status](https://travis-ci.org/samvera/hydra-file_characterization.png?branch=master)](https://travis-ci.org/samvera/hydra-file_characterization)
 [![Coverage Status](https://coveralls.io/repos/github/samvera/hydra-file_characterization/badge.svg?branch=master)](https://coveralls.io/github/samvera/hydra-file_characterization?branch=master)
 
-Hydra::FileCharacterization as (extracted from Sufia and Hydra::Derivatives)
+Docs: [![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md)
+[![Apache 2.0 License](http://img.shields.io/badge/APACHE2-license-blue.svg)](./LICENSE)
 
-## Purpose
+Jump in: [![Slack Status](http://slack.samvera.org/badge.svg)](http://slack.samvera.org/)
 
-To provide a wrapper for file characterization
+# What is hydra-file_characterization?
 
-## How To Use
+Provides a wrapper for file characterization.
+
+## Product Owner & Maintenance
+
+hydra-file_characterization is a Core Component of the Samvera community. The documentation for
+what this means can be found
+[here](http://samvera.github.io/core_components.html#requirements-for-a-core-component).
+
+### Product Owner
+
+[little9](https://github.com/little9)
+
+# Help
+
+The Samvera community is here to help. Please see our [support guide](./SUPPORT.md).
+
+# Getting Started
 
 If you are using Rails add the following to an initializer (./config/initializers/hydra-file_characterization_config.rb):
 
@@ -63,3 +81,10 @@ fits_xml, ffprobe_xml = Hydra::FileCharacterization.characterize(contents_of_a_f
 ## Registering New Characterizers
 
 This is possible by adding a characterizer to the `Hydra::FileCharacterization::Characterizers`' namespace.
+
+# Acknowledgments
+
+This software has been developed by and is brought to you by the Samvera community.  Learn more at the
+[Samvera website](http://samvera.org/).
+
+![Samvera Logo](https://wiki.duraspace.org/download/thumbnails/87459292/samvera-fall-font2-200w.png?version=1&modificationDate=1498550535816&api=v2)
