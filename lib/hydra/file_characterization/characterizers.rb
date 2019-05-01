@@ -29,3 +29,4 @@ end
 
 require 'hydra/file_characterization/characterizers/fits'
 require 'hydra/file_characterization/characterizers/ffprobe'
+require 'hydra/file_characterization/characterizers/fits_servlet'
