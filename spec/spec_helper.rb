@@ -30,6 +30,7 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = 'random'
   config.before(:suite) do
-    Hydra::FileCharacterization::Characterizers::Fits.tool_path = `which fits || which fits.sh`.strip
+    tool_path = `which fits || which fits.sh`.strip
+    Hydra::FileCharacterization::Characterizers::Fits.tool_path = tool_path
   end
 end

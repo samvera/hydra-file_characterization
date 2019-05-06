@@ -1,0 +1,85 @@
+---
+version: 2.1
+orbs:
+  samvera: samvera/circleci-orb@0
+jobs:
+  bundle:
+    parameters:
+      ruby_version:
+        type: string
+        default: 2.5.5
+      bundler_version:
+        type: string
+        default: 1.17.3
+      rails_version:
+        type: string
+        default: '5.2.2'
+    executor:
+      name: 'samvera/ruby'
+      ruby_version: << parameters.ruby_version >>
+    environment:
+      RAILS_VERSION: << parameters.rails_version >>
+      NOKOGIRI_USE_SYSTEM_LIBRARIES: true
+    steps:
+      - run:
+          name: Install the FITS
+          command: |
+            mkdir ~/fits
+            wget "https://github.com/harvard-lts/fits/releases/download/1.4.1/fits-1.4.1.zip"
+            unzip -d ~/fits/ "fits-1.4.1.zip"
+            chmod a+x ~/fits/fits.sh
+            ln -s ~/fits/fits.sh ~/fits/fits
+            rm "fits-1.4.1.zip"
+      - samvera/cached_checkout
+      - samvera/bundle_for_gem:
+          ruby_version: << parameters.ruby_version >>
+          bundler_version: << parameters.bundler_version >>
+          project: hydra-file_characterization
+      - persist_to_workspace:
+          root: ~/
+          paths:
+          - fits/*
+          - project/*
+          - project/**/*
+  test:
+    parameters:
+      ruby_version:
+        type: string
+        default: 2.5.5
+      bundler_version:
+        type: string
+        default: 1.17.3
+    executor:
+      name: 'samvera/ruby_fcrepo_solr_redis'
+      ruby_version: << parameters.ruby_version >>
+    steps:
+      - attach_workspace:
+          at: ~/
+      - samvera/bundle_for_gem:
+          ruby_version: << parameters.ruby_version >>
+          bundler_version: << parameters.bundler_version >>
+          project: hydra-file_characterization
+      - run:
+          name: Update the PATH env. variable
+          command: |
+            echo "export PATH=$HOME/fits:$PATH" >> $BASH_ENV
+            source $BASH_ENV
+      - samvera/parallel_rspec
+
+workflows:
+  version: 2
+  ci:
+    jobs:
+      - bundle:
+          ruby_version: "2.5.5"
+          rails_version: "5.1.7"
+      - test:
+          name: "ruby2-5-5"
+          ruby_version: "2.5.5"
+          requires:
+            - bundle
+      - test:
+          name: "ruby2-6-2"
+          ruby_version: "2.6.2"
+          requires:
+            - bundle
