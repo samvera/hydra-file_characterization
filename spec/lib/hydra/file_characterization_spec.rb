@@ -18,10 +18,15 @@ module Hydra
         end
 
         describe 'with configured path' do
+          let(:tool_path) do
+            `which fits || which fits.sh`.strip
+          end
+
           it {
             response = Hydra::FileCharacterization.characterize(content, filename, :fits) do |config|
-              config[:fits] = `which fits || which fits.sh`.strip
+              config[:fits] = tool_path
             end
+
             expect(response).to match(/#{'<identity format="Plain text" mimetype="text/plain"'}/)
           }
         end
@@ -89,7 +94,7 @@ module Hydra
         Hydra::FileCharacterization::Characterizers::Fits.tool_path = old_tool_path
       end
 
-      it 'without configuration', unless: ENV['TRAVIS'] do
+      it 'without configuration', unless: ENV['CI'] do
         Hydra::FileCharacterization.configure do |config|
           config.tool_path(:fits, nil)
         end
