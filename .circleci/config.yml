@@ -21,8 +21,6 @@ jobs:
       RAILS_VERSION: << parameters.rails_version >>
       NOKOGIRI_USE_SYSTEM_LIBRARIES: true
     steps:
-      - attach_workspace:
-          at: ~/
       - run:
           name: Install the FITS
           command: |
@@ -31,7 +29,6 @@ jobs:
             unzip -d ~/fits/ "fits-1.4.1.zip"
             chmod a+x ~/fits/fits.sh
             ln -s ~/fits/fits.sh ~/fits/fits
-            rm "fits-1.4.1.zip"
       - samvera/cached_checkout
       - samvera/bundle_for_gem:
           ruby_version: << parameters.ruby_version >>
@@ -43,12 +40,6 @@ jobs:
             echo "export PATH=$HOME/fits:$PATH" >> $BASH_ENV
             source $BASH_ENV
       - samvera/parallel_rspec
-      - persist_to_workspace:
-          root: ~/
-          paths:
-          - fits/*
-          - project/*
-          - project/**/*
 
 workflows:
   version: 2
