@@ -1,8 +1,16 @@
 # Changelog
 
-## [1.1.1](https://github.com/samvera/hydra-file_characterization/tree/1.1.1) (2020-06-10)
+## [1.1.2](https://github.com/samvera/hydra-file_characterization/tree/1.1.2) (2020-06-10)
 
-[Full Changelog](https://github.com/samvera/hydra-file_characterization/compare/v1.1.0...1.1.1)
+[Full Changelog](https://github.com/samvera/hydra-file_characterization/compare/v1.1.1...1.1.2)
+
+**Merged pull requests:**
+
+- Enforce samvera style rules [\#49](https://github.com/samvera/hydra-file_characterization/pull/49) ([bess](https://github.com/bess))
+
+## [v1.1.1](https://github.com/samvera/hydra-file_characterization/tree/v1.1.1) (2020-06-10)
+
+[Full Changelog](https://github.com/samvera/hydra-file_characterization/compare/v1.1.0...v1.1.1)
 
 **Closed issues:**
 
@@ -12,6 +20,7 @@
 
 **Merged pull requests:**
 
+- Prep for 1.1.1 release [\#48](https://github.com/samvera/hydra-file_characterization/pull/48) ([bess](https://github.com/bess))
 - Adding Ruby 2.7.z and Rails 6.y.z releases to the CircleCI build configuration [\#46](https://github.com/samvera/hydra-file_characterization/pull/46) ([jrgriffiniii](https://github.com/jrgriffiniii))
 - Update CircleCI Ruby and Rails versions [\#43](https://github.com/samvera/hydra-file_characterization/pull/43) ([botimer](https://github.com/botimer))
 - Updates the CircleCI configuration to test against Rails release 5.1.7 and Ruby releases 2.6.3, 2.5.5, and 2.4.6 [\#42](https://github.com/samvera/hydra-file_characterization/pull/42) ([jrgriffiniii](https://github.com/jrgriffiniii))
