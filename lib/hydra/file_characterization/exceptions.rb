@@ -1,5 +1,5 @@
+# frozen_string_literal: true
 module Hydra::FileCharacterization
-
   class FileNotFoundError < RuntimeError
   end
 
@@ -8,5 +8,4 @@ module Hydra::FileCharacterization
       super("Unable to find Hydra::FileCharacterization tool with name :#{tool_name}")
     end
   end
-
 end

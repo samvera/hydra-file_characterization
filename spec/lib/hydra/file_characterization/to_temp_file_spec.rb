@@ -1,10 +1,9 @@
+# frozen_string_literal: true
 require 'spec_helper'
 require 'hydra/file_characterization/to_temp_file'
 
 module Hydra::FileCharacterization
-
   describe 'ToTempFile' do
-
     let(:content) { "This is the content of the file." }
     let(:filename) { "hello.rb" }
 
@@ -44,6 +43,5 @@ module Hydra::FileCharacterization
         end
       end
     end
-
   end
 end

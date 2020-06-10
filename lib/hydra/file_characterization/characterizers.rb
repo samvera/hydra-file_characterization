@@ -1,19 +1,21 @@
+# frozen_string_literal: true
 module Hydra::FileCharacterization
   module Characterizers
   end
 
   module_function
+
   def characterizer(tool_name)
     characterizer_name = characterizer_name_from(tool_name)
     if Characterizers.const_defined?(characterizer_name)
       Characterizers.const_get(characterizer_name)
     else
-      raise ToolNotFoundError.new(tool_name)
+      raise ToolNotFoundError, tool_name
     end
   end
 
   def characterizer_name_from(tool_name)
-    tool_name.to_s.gsub(/(?:^|_)([a-z])/) { $1.upcase }
+    tool_name.to_s.gsub(/(?:^|_)([a-z])/) { Regexp.last_match(1).upcase }
   end
 
   def characterize_with(tool_name, path_to_file, path_to_tool)
@@ -24,7 +26,6 @@ module Hydra::FileCharacterization
       tool_obj.call
     end
   end
-
 end
 
 require 'hydra/file_characterization/characterizers/fits'

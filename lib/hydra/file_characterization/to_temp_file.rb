@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'open3'
 require 'tempfile'
 
@@ -16,7 +17,7 @@ module Hydra::FileCharacterization
     end
 
     def call(data)
-      f = Tempfile.new([File.basename(filename),File.extname(filename)])
+      f = Tempfile.new([File.basename(filename), File.extname(filename)])
       begin
         f.binmode
         if data.respond_to? :read
@@ -32,6 +33,5 @@ module Hydra::FileCharacterization
         f.unlink
       end
     end
-
   end
 end

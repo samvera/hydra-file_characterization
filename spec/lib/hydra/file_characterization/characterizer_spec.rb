@@ -1,30 +1,31 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 module Hydra::FileCharacterization
   describe Characterizer do
+    subject { characterizer }
     let(:filename) { __FILE__ }
     let(:instance_tool_path) { nil }
     let(:class_tool_path) { nil }
 
-    let(:characterizer) { Hydra::FileCharacterization::Characterizer.new(filename, instance_tool_path) }
-    subject { characterizer }
-    around(:each) do |example|
-      Hydra::FileCharacterization::Characterizer.tool_path = class_tool_path
+    let(:characterizer) { described_class.new(filename, instance_tool_path) }
+    around do |example|
+      described_class.tool_path = class_tool_path
       example.run
-      Hydra::FileCharacterization::Characterizer.tool_path = nil
+      described_class.tool_path = nil
     end
 
     context 'call' do
       context 'with missing file' do
         let(:filename) { '/dev/path/to/bogus/file' }
-        it 'should raise FileNotFoundError' do
+        it 'raises FileNotFoundError' do
           expect { subject.call }.to raise_error(FileNotFoundError)
         end
       end
 
       context 'with a callable tool path' do
-        let(:class_tool_path) { lambda { |filename| [filename, :output] }}
-        it 'should raise FileNotFoundError' do
+        let(:class_tool_path) { ->(filename) { [filename, :output] } }
+        it 'raises FileNotFoundError' do
           expect(subject.call).to eq [filename, :output]
         end
       end
