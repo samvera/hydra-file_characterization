@@ -1,11 +1,8 @@
 # hydra-file_characterization
 
-Code: [![Version](https://badge.fury.io/rb/hydra-file_characterization.png)](http://badge.fury.io/rb/hydra-file_characterization)
-[![CircleCI](https://circleci.com/gh/samvera/hydra-file_characterization.svg?style=svg)](https://circleci.com/gh/samvera/hydra-file_characterization)
-[![Coverage Status](https://coveralls.io/repos/github/samvera/hydra-file_characterization/badge.svg?branch=master)](https://coveralls.io/github/samvera/hydra-file_characterization?branch=master)
+Code: [![Version](https://badge.fury.io/rb/hydra-file_characterization.png)](http://badge.fury.io/rb/hydra-file_characterization) [![CircleCI](https://circleci.com/gh/samvera/hydra-file_characterization.svg?style=svg)](https://circleci.com/gh/samvera/hydra-file_characterization) [![Coverage Status](https://coveralls.io/repos/github/samvera/hydra-file_characterization/badge.svg?branch=master)](https://coveralls.io/github/samvera/hydra-file_characterization?branch=master)
 
-Docs: [![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md)
-[![Apache 2.0 License](http://img.shields.io/badge/APACHE2-license-blue.svg)](./LICENSE)
+Docs: [![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md) [![Apache 2.0 License](http://img.shields.io/badge/APACHE2-license-blue.svg)](./LICENSE)
 
 Jump in: [![Slack Status](http://slack.samvera.org/badge.svg)](http://slack.samvera.org/)
 
@@ -15,9 +12,7 @@ Provides a wrapper for file characterization.
 
 ## Product Owner & Maintenance
 
-hydra-file_characterization is a Core Component of the Samvera community. The documentation for
-what this means can be found
-[here](http://samvera.github.io/core_components.html#requirements-for-a-core-component).
+hydra-file_characterization is a Core Component of the Samvera community. The documentation for what this means can be found [here](http://samvera.github.io/core_components.html#requirements-for-a-core-component).
 
 ### Product Owner
 
@@ -36,19 +31,21 @@ Hydra::FileCharacterization.configure do |config|
   config.tool_path(:fits, '/path/to/fits')
 end
 ```
+
 ```ruby
-Hydra::FileCharacterization.characterize(File.read(filename), File.basename(filename), :fits)```
+Hydra::FileCharacterization.characterize(File.read(filename), File.basename(filename), :fits)
+```
 
-* Why `file.read`? To highlight that we want a string. In the case of ActiveFedora, we have a StringIO instead of a file.
-* Why `file.basename`? In the case of Fits, the characterization takes cues from the extension name.
+- Why `file.read`? To highlight that we want a string. In the case of ActiveFedora, we have a StringIO instead of a file.
+- Why `file.basename`? In the case of Fits, the characterization takes cues from the extension name.
 
-You can call a single characterizer…
+You can call a single characterizer...
 
 ```ruby
 xml_string = Hydra::FileCharacterization.characterize(File.read("/path/to/my/file.rb"), 'file.rb', :fits)
 ```
 
-…for this particular call, you can specify custom fits path…
+...for this particular call, you can specify custom fits path...
 
 ```ruby
 xml_string = Hydra::FileCharacterization.characterize(contents_of_a_file, 'file.rb', :fits) do |config|
@@ -56,7 +53,7 @@ xml_string = Hydra::FileCharacterization.characterize(contents_of_a_file, 'file.
 end
 ```
 
-…or even make the path callable…
+...or even make the path callable...
 
 ```ruby
 xml_string = Hydra::FileCharacterization.characterize(contents_of_a_file, 'file.rb', :fits) do |config|
@@ -64,7 +61,7 @@ xml_string = Hydra::FileCharacterization.characterize(contents_of_a_file, 'file.
 end
 ```
 
-…or even create your custom characterizer on the file…
+...or even create your custom characterizer on the file...
 
 ```ruby
 xml_string = Hydra::FileCharacterization.characterize(contents_of_a_file, 'file.rb', :my_characterizer) do |config|
@@ -82,9 +79,22 @@ fits_xml, ffprobe_xml = Hydra::FileCharacterization.characterize(contents_of_a_f
 
 This is possible by adding a characterizer to the `Hydra::FileCharacterization::Characterizers`' namespace.
 
+## Releasing
+
+1. `bundle install`
+2. Increase the version number in `lib/hydra/file_characterization/version.rb`
+3. Increase the same version number in `.github_changelog_generator`
+4. Update `CHANGELOG.md` by running this command:
+
+  ```
+  github_changelog_generator --user samvera --project hydra-file_characterization --token YOUR_GITHUB_TOKEN_HERE
+  ```
+
+5. Commit these changes to the master branch
+6. Run `rake release`
+
 # Acknowledgments
 
-This software has been developed by and is brought to you by the Samvera community.  Learn more at the
-[Samvera website](http://samvera.org/).
+This software has been developed by and is brought to you by the Samvera community. Learn more at the [Samvera website](http://samvera.org/).
 
 ![Samvera Logo](https://wiki.duraspace.org/download/thumbnails/87459292/samvera-fall-font2-200w.png?version=1&modificationDate=1498550535816&api=v2)
