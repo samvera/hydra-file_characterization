@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require "hydra/file_characterization/version"
 require "hydra/file_characterization/exceptions"
 require "hydra/file_characterization/to_temp_file"
@@ -6,7 +7,6 @@ require "hydra/file_characterization/characterizers"
 require "active_support/configurable"
 
 module Hydra
-
   module_function
 
   # A convenience method
@@ -15,7 +15,6 @@ module Hydra
   end
 
   module FileCharacterization
-
     class << self
       attr_accessor :configuration
     end
@@ -66,7 +65,7 @@ module Hydra
       tool_names = Array(tool_names).flatten.compact
       custom_paths = {}
       yield(custom_paths) if block_given?
-      
+
       tool_outputs = run_characterizers(content, filename, tool_names, custom_paths)
       tool_names.size == 1 ? tool_outputs.first : tool_outputs
     end
@@ -76,50 +75,47 @@ module Hydra
       yield(configuration)
     end
 
-    private
-
-      # Break up a list of arguments into two possible lists:
-      #   option1:  [String] content, [String] filename, [Array] tool_names
-      #   option2:  [File] content, [Array] tool_names
-      # In the case of option2, derive the filename from the file's path  
-      # @return [String, File], [String], [Array]
-      def self.extract_arguments(args)
-        content = args.shift
-        filename = if content.is_a?(File) && !args[0].is_a?(String)
-          File.basename(content.path)
-        else
-           args.shift
-        end
-        tool_names = args
-        return content, filename, tool_names
+    # Break up a list of arguments into two possible lists:
+    #   option1:  [String] content, [String] filename, [Array] tool_names
+    #   option2:  [File] content, [Array] tool_names
+    # In the case of option2, derive the filename from the file's path
+    # @return [String, File], [String], [Array]
+    def self.extract_arguments(args)
+      content = args.shift
+      filename = if content.is_a?(File) && !args[0].is_a?(String)
+                   File.basename(content.path)
+                 else
+                   args.shift
       end
+      tool_names = args
+      [content, filename, tool_names]
+    end
 
-      # @param [File, String] content Either an open file or a string. If a string is passed
-      #                               a temp file will be created
-      # @param [String] filename Used in creating a temp file name
-      # @param [Array<Symbol>] tool_names A list of symbols referencing the characerization tools to run
-      # @param [Hash] custom_paths The paths to the executables of the tool.
-      def self.run_characterizers(content, filename, tool_names, custom_paths)
-        if content.is_a? File
-          run_characterizers_on_file(content, tool_names, custom_paths)
-        else 
-          FileCharacterization::ToTempFile.open(filename, content) do |f|
-            run_characterizers_on_file(f, tool_names, custom_paths)
-          end
+    # @param [File, String] content Either an open file or a string. If a string is passed
+    #                               a temp file will be created
+    # @param [String] filename Used in creating a temp file name
+    # @param [Array<Symbol>] tool_names A list of symbols referencing the characerization tools to run
+    # @param [Hash] custom_paths The paths to the executables of the tool.
+    def self.run_characterizers(content, filename, tool_names, custom_paths)
+      if content.is_a? File
+        run_characterizers_on_file(content, tool_names, custom_paths)
+      else
+        FileCharacterization::ToTempFile.open(filename, content) do |f|
+          run_characterizers_on_file(f, tool_names, custom_paths)
         end
       end
+    end
 
-      def self.run_characterizers_on_file(f, tool_names, custom_paths)
-        tool_names.map do |tool_name|
-           FileCharacterization.characterize_with(tool_name, f.path, custom_paths[tool_name])
-        end
+    def self.run_characterizers_on_file(f, tool_names, custom_paths)
+      tool_names.map do |tool_name|
+        FileCharacterization.characterize_with(tool_name, f.path, custom_paths[tool_name])
       end
+    end
 
     class Configuration
       def tool_path(tool_name, tool_path)
         Hydra::FileCharacterization.characterizer(tool_name).tool_path = tool_path
       end
     end
-
   end
 end
