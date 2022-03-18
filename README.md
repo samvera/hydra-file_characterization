@@ -4,11 +4,18 @@ Code: [![Version](https://badge.fury.io/rb/hydra-file_characterization.png)](htt
 
 Docs: [![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md) [![Apache 2.0 License](http://img.shields.io/badge/APACHE2-license-blue.svg)](./LICENSE)
 
-Jump in: [![Slack Status](http://slack.samvera.org/badge.svg)](http://slack.samvera.org/)
+[Join the Samvera Slack channel](http://slack.samvera.org/)
 
 # What is hydra-file_characterization?
 
 Provides a wrapper for file characterization.
+
+# Supported versions
+
+This software is currently tested against: 
+* FITS 1.4.1
+* Ruby 2.6, 2.7, and 3.0
+* Rails 5.2, 6.0, 6.1, and 7.0
 
 ## Product Owner & Maintenance
 
