@@ -9,7 +9,7 @@ jobs:
         type: string
       bundler_version:
         type: string
-        default: 1.17.3
+        default: 2.3.10
       rails_version:
         type: string
     executor:
@@ -44,6 +44,48 @@ jobs:
 workflows:
   version: 2
   ci:
+    jobs:
+      - test:
+          name: ruby3-0_rails7
+          ruby_version: 3.0.3
+          rails_version: 7.0.2.3
+      - test:
+          name: ruby3-0_rails6-1
+          ruby_version: 3.0.3
+          rails_version: 6.1.5
+      - test:
+          name: ruby3-0_rails6-0
+          ruby_version: 3.0.3
+          rails_version: 6.0.4.7
+      - test:
+          name: ruby2-7_rails6-1
+          ruby_version: 2.7.5
+          rails_version: 6.1.5
+      - test:
+          name: ruby2-7_rails6-0
+          ruby_version: 2.7.5
+          rails_version: 6.0.4.7
+      - test:
+          name: ruby2-6_rails6-0
+          ruby_version: 2.6.9
+          rails_version: 6.0.4.7
+      - test:
+          name: ruby2-7_rails5-2
+          ruby_version: 2.7.5
+          rails_version: 5.2.7
+      - test:
+          name: ruby2-6_rails5-2
+          ruby_version: 2.6.5
+          rails_version: 5.2.7
+
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - main
     jobs:
       - test:
           name: ruby3-0_rails7
