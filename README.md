@@ -21,10 +21,6 @@ This software is currently tested against:
 
 hydra-file_characterization is a Core Component of the Samvera community. The documentation for what this means can be found [here](http://samvera.github.io/core_components.html#requirements-for-a-core-component).
 
-### Product Owner
-
-[little9](https://github.com/little9)
-
 # Help
 
 The Samvera community is here to help. Please see our [support guide](./SUPPORT.md).
@@ -84,9 +80,23 @@ fits_xml, ffprobe_xml = Hydra::FileCharacterization.characterize(contents_of_a_f
 
 ## Registering New Characterizers
 
-This is possible by adding a characterizer to the `Hydra::FileCharacterization::Characterizers`' namespace.
+This is possible by adding a characterizer to the `Hydra::FileCharacterization::Characterizers` namespace.
 
 ## Contributing 
+
+Running the tests: 
+* Install FITS v1.4.1, which is the most recent version we've tested against.
+```
+mkdir ~/fits
+wget "https://github.com/harvard-lts/fits/releases/download/1.4.1/fits-1.4.1.zip"
+unzip -d ~/fits/ "fits-1.4.1.zip"
+chmod a+x ~/fits/fits.sh
+ln -s ~/fits/fits.sh ~/fits/fits
+rm "fits-1.4.1.zip"
+```
+
+* Once FITS is installed, you should be able to run the tests with: `rspec spec`
+
 
 If you're working on PR for this project, create a feature branch off of `main`. 
 
@@ -110,4 +120,4 @@ This repository follows the [Samvera Community Code of Conduct](https://samvera.
 
 This software has been developed by and is brought to you by the Samvera community. Learn more at the [Samvera website](http://samvera.org/).
 
-![Samvera Logo](https://wiki.duraspace.org/download/thumbnails/87459292/samvera-fall-font2-200w.png?version=1&modificationDate=1498550535816&api=v2)
+![Samvera Logo](https://samvera.org/wp-content/uploads/2017/06/samvera-logo-tm.svg)
