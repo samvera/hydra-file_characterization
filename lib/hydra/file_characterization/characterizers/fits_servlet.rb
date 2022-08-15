@@ -7,17 +7,7 @@ module Hydra::FileCharacterization::Characterizers
     protected
 
     def command
-      "curl -k -F datafile=@#{filename} #{ENV['FITS_SERVLET_URL']}/examine"
-    end
-
-    # Remove any non-XML output that precedes the <?xml> tag
-    # See: https://github.com/harvard-lts/fits/issues/20
-    #      https://github.com/harvard-lts/fits/issues/40
-    #      https://github.com/harvard-lts/fits/issues/46
-    def post_process(raw_output)
-      md = /\A(.*)(<\?xml.*)\Z/m.match(raw_output)
-      logger.warn "FITS produced non-xml output: \"#{md[1].chomp}\"" unless md[1].empty?
-      md[2]
+      "curl -s -k -F datafile=@'#{filename}' #{ENV['FITS_SERVLET_URL']}/examine"
     end
   end
 end
