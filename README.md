@@ -1,10 +1,15 @@
 # hydra-file_characterization
 
-Code: [![Version](https://badge.fury.io/rb/hydra-file_characterization.png)](http://badge.fury.io/rb/hydra-file_characterization) [![CircleCI](https://circleci.com/gh/samvera/hydra-file_characterization.svg?style=svg)](https://circleci.com/gh/samvera/hydra-file_characterization) [![Coverage Status](https://coveralls.io/repos/github/samvera/hydra-file_characterization/badge.svg?branch=main)](https://coveralls.io/github/samvera/hydra-file_characterization?branch=main)
+Code:
+[![Gem Version](https://badge.fury.io/rb/hydra-file_characterization.png)](http://badge.fury.io/rb/hydra-file_characterization)
+[![Build Status](https://circleci.com/gh/samvera/hydra-file_characterization.svg?style=svg)](https://circleci.com/gh/samvera/hydra-file_characterization)
+[![Coverage Status](https://coveralls.io/repos/github/samvera/hydra-file_characterization/badge.svg?branch=main)](https://coveralls.io/github/samvera/hydra-file_characterization?branch=main)
 
-Docs: [![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md) [![Apache 2.0 License](http://img.shields.io/badge/APACHE2-license-blue.svg)](./LICENSE)
+Docs:
+[![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md)
+[![Apache 2.0 License](http://img.shields.io/badge/APACHE2-license-blue.svg)](./LICENSE)
 
-[Join the Samvera Slack channel](http://slack.samvera.org/)
+Community Support: [![Samvera Community Slack](https://img.shields.io/badge/samvera-slack-blueviolet)](http://slack.samvera.org/)
 
 # What is hydra-file_characterization?
 
@@ -15,11 +20,17 @@ Provides a wrapper for file characterization.
 This software is currently tested against: 
 * FITS 1.4.1
 * Ruby 2.6, 2.7, and 3.0
-* Rails 5.2, 6.0, 6.1, and 7.0
+* Rails 6.0, 6.1, and 7.0
 
 ## Product Owner & Maintenance
 
-hydra-file_characterization is a Core Component of the Samvera community. The documentation for what this means can be found [here](http://samvera.github.io/core_components.html#requirements-for-a-core-component).
+`hydra-file_characterization` was a Core Component of the Samvera Community. Given a decline in available labor required for maintenance, this project no longer has a dedicated Product Owner. The documentation for what this means can be found [here](http://samvera.github.io/core_components.html#requirements-for-a-core-component).
+
+### Product Owner
+
+**Vacant**
+
+_Until a Product Owner has been identified, we ask that you please direct all requests for support, bug reports, and general questions to the [`#dev` Channel on the Samvera Slack](https://samvera.slack.com/app_redirect?channel=dev)._
 
 # Help
 
