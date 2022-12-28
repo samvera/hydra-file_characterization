@@ -1,7 +1,7 @@
 ---
 version: 2.1
 orbs:
-  samvera: samvera/circleci-orb@0
+  samvera: samvera/circleci-orb@1.0
 jobs:
   test:
     parameters:
@@ -45,37 +45,41 @@ workflows:
   version: 2
   ci:
     jobs:
+      # Rails 7.0
+      ## Ruby 3.0
       - test:
           name: ruby3-0_rails7
           ruby_version: 3.0.3
           rails_version: 7.0.2.3
+      # Rails 6.1
+      ## Ruby 3.0
       - test:
           name: ruby3-0_rails6-1
           ruby_version: 3.0.3
           rails_version: 6.1.5
+      # Rails 6.0
+      ## Ruby 3.0
       - test:
           name: ruby3-0_rails6-0
           ruby_version: 3.0.3
           rails_version: 6.0.4.7
+      # Rails 6.1
+      ## Ruby 2.7
       - test:
           name: ruby2-7_rails6-1
-          ruby_version: 2.7.5
+          ruby_version: 2.7.7
           rails_version: 6.1.5
+      # Rails 6.0
+      ## Ruby 2.7
       - test:
           name: ruby2-7_rails6-0
-          ruby_version: 2.7.5
+          ruby_version: 2.7.7
           rails_version: 6.0.4.7
-      - test:
-          name: ruby2-6_rails6-0
-          ruby_version: 2.6.9
-          rails_version: 6.0.4.7
+      # Rails 6.0
+      ## Ruby 2.7
       - test:
           name: ruby2-7_rails5-2
-          ruby_version: 2.7.5
-          rails_version: 5.2.7
-      - test:
-          name: ruby2-6_rails5-2
-          ruby_version: 2.6.5
+          ruby_version: 2.7.7
           rails_version: 5.2.7
 
   nightly:
@@ -101,21 +105,13 @@ workflows:
           rails_version: 6.0.4.7
       - test:
           name: ruby2-7_rails6-1
-          ruby_version: 2.7.5
+          ruby_version: 2.7.7
           rails_version: 6.1.5
       - test:
           name: ruby2-7_rails6-0
-          ruby_version: 2.7.5
-          rails_version: 6.0.4.7
-      - test:
-          name: ruby2-6_rails6-0
-          ruby_version: 2.6.9
+          ruby_version: 2.7.7
           rails_version: 6.0.4.7
       - test:
           name: ruby2-7_rails5-2
-          ruby_version: 2.7.5
-          rails_version: 5.2.7
-      - test:
-          name: ruby2-6_rails5-2
-          ruby_version: 2.6.5
+          ruby_version: 2.7.7
           rails_version: 5.2.7
